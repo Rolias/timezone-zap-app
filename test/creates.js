@@ -24,4 +24,30 @@ describe('creates', () => {
         .catch(done);
     });
   });
+
+  describe('make a call to timezonebyName API', () => {
+    it('should get a timezone object back', (done) => {
+      const bundle = {
+        inputData: {
+          zoneName: 'CT',
+        }
+      };
+
+      appTester(App.creates.timezoneName.operation.perform, bundle)
+        .then((result) => {
+          result.should.have.property('rawOffset');
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+
+
+
+
+
+
+
+
 });

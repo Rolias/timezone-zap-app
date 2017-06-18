@@ -9,8 +9,8 @@ module.exports = {
   // for users. Zapier will put them into the UX.
   noun: 'Timezone',
   display: {
-    label: 'Timezone Helper',
-    description: 'Calls Google API for timezone offsets'
+    label: 'Timezone Latitude Longitude',
+    description: 'Will get local timezone offsets using longitude and latitude'
   },
 
   // `operation` is where the business logic goes.
@@ -18,7 +18,6 @@ module.exports = {
     inputFields: [
       {key: 'latitude', required: true, type: 'string', helpText:'Latitude of location for the timezone.'},
       {key: 'longitude', required: true, type: 'string', helpText: 'Longitude of the location for the timezone.'},
-      //{key: 'currentTime', required:false,type: 'timestamp', helpText:'If given adjHourOffset will be 0-24, otherwise it can be negative.'},
     ],
 
     perform: (z, bundle) => {
@@ -60,8 +59,6 @@ module.exports = {
         var testDate = new Date(localTimestamp);
         console.log("Hours: "+ testDate.getHours()+ " Minutes:"+ testDate.getMinutes());
 
-
-
         return timezoneObj;
       });  
   },
@@ -79,8 +76,6 @@ module.exports = {
       adjHoursOffset: 12,
       localTimestampMs: 1497695991304
     },
-
-   
     
     // If the resource can have fields that are custom on a per-user basis, define a function to fetch the custom
     // field definitions. The result will be used to augment the sample.

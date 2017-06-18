@@ -1,4 +1,5 @@
 const timezone = require('./creates/timezone');
+const timezoneByName = require ('./creates/timezoneByName');
 
 // Now we can roll up all our behaviors in an App.
 const App = {
@@ -26,7 +27,8 @@ const App = {
 
   // If you want your creates to show up, you better include it here!
   creates: {
-    [timezone.key]: timezone
+    [timezone.key]: timezone,
+    [timezoneByName.key]: timezoneByName,
   }
 };
 
