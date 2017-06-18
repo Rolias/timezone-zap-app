@@ -20,19 +20,21 @@ module.exports = {
       {key: 'longitude', required: true, type: 'string', helpText: 'Longitude of the location for the timezone.'},
       //{key: 'currentTime', required:false,type: 'timestamp', helpText:'If given adjHourOffset will be 0-24, otherwise it can be negative.'},
     ],
+
     perform: (z, bundle) => {
       const googleUrl = "https://maps.googleapis.com/maps/api/timezone/json?", 
             location = "location="+bundle.inputData.latitude+","+bundle.inputData.longitude,
             currentDate = new Date(),
             MSECS_PER_SEC = 1000,
-            timeAsSecs = parseInt(currentDate.getTime()/MSECS_PER_SEC),
+            currentTime = currentDate.getTime(),
+            timeAsSecs = parseInt(currentTime/MSECS_PER_SEC),
             timestamp= "&timestamp="+timeAsSecs,
             googleKey = "&key="+AUTH.googleApiKey,  
             googleCmd = googleUrl+location+timestamp+googleKey,
             promise = z.request(googleCmd, {
             });
             //console.log ("GoogleCmd is:"+googleCmd);
-            
+           //this.util();
 
       return promise.then((response) => {
         const SECS_PER_HOUR = 3600;
@@ -48,7 +50,18 @@ module.exports = {
           adjHour= 24+adjHour;
         }
         timezoneObj.adjHoursOffset = adjHour;
+        var localTimestamp = currentTime +(timezoneObj.totalOffset * MSECS_PER_SEC);
+        timezoneObj.localTimestampMs = localTimestamp;
+        console.log ("type is "+ typeof timezoneObj.localTimestampMs);
+
         console.log(timezoneObj);
+
+        // Special tests
+        var testDate = new Date(localTimestamp);
+        console.log("Hours: "+ testDate.getHours()+ " Minutes:"+ testDate.getMinutes());
+
+
+
         return timezoneObj;
       });  
   },
@@ -63,9 +76,12 @@ module.exports = {
       timeZoneId: 'America/Los_Angeles',
       timeZoneName: 'Pacific Daylight Time',
       totalOffset: -25200,
-      adjHoursOffset: -8
+      adjHoursOffset: 12,
+      localTimestampMs: 1497695991304
     },
 
+   
+    
     // If the resource can have fields that are custom on a per-user basis, define a function to fetch the custom
     // field definitions. The result will be used to augment the sample.
     // outputFields: () => { return []; }
@@ -78,6 +94,7 @@ module.exports = {
       {key: 'timeZoneName', label: 'Timezone name (e.g. Pacific Daylight Time'},
       {key: 'totalOffset', label: 'Timezone raw and dst combined'},
       {key: 'adjHoursOffset', label:'Hours Value in local timezone'},
+      {key: 'localTimestampMs', label:'Local Time in MS'}
     ]
   }
 };
