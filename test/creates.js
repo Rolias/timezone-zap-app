@@ -1,5 +1,5 @@
 require('should');
-
+/* global describe, it */
 const zapier = require('zapier-platform-core');
 
 const App = require('../index');
@@ -51,6 +51,22 @@ describe('creates', () => {
       appTester(App.creates.timezoneName.operation.perform, bundle)
         .then((result) => {
           result.should.have.property('timeZoneName').which.containEql("Central European");
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should get a status object back for a bad timezone', (done) => {
+      const bundle = {
+        inputData: {
+          zoneName: 'FAKE',
+        }
+      };
+
+      appTester(App.creates.timezoneName.operation.perform, bundle)
+        .then((result) => {
+          result.should.have.property('status').which.containEql("ERROR");
+          console.log(result);
           done();
         })
         .catch(done);
