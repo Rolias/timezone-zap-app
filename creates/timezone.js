@@ -32,46 +32,6 @@ module.exports = {
 
     perform: (z, bundle) => {
       return Google.getTimeZoneByLatLon(z, bundle.inputData.latitude, bundle.inputData.longitude);
-      // const googleUrl = "https://maps.googleapis.com/maps/api/timezone/json?", 
-      //       location = "location="+bundle.inputData.latitude+","+bundle.inputData.longitude,
-      //       currentDate = new Date(),
-      //       MSECS_PER_SEC = 1000,
-      //       currentTime = currentDate.getTime(),
-      //       timeAsSecs = parseInt(currentTime/MSECS_PER_SEC),
-      //       timestamp= "&timestamp="+timeAsSecs,
-      //       googleKey = "&key="+AUTH.googleApiKey,  
-      //       googleCmd = googleUrl+location+timestamp+googleKey,
-      //       promise = z.request(googleCmd, {
-      //       });
-      //       //console.log ("GoogleCmd is:"+googleCmd);
-      //      //this.util();
-
-      // return promise.then((response) => {
-      //   const SECS_PER_HOUR = 3600;
-      //   var currentHour = currentDate.getHours(),
-      //       timezoneObj =  JSON.parse(response.content);
-      //   timezoneObj.totalOffset = timezoneObj.rawOffset + timezoneObj.dstOffset;
-      //   var offsetHours = timezoneObj.totalOffset/SECS_PER_HOUR;
-      //   console.log(currentHour);
-      //   console.log(offsetHours);
-      //   var adjHour = currentHour + offsetHours;
-
-      //   if (adjHour < 0){
-      //     adjHour= 24+adjHour;
-      //   }
-      //   timezoneObj.adjHoursOffset = adjHour;
-      //   var localTimestamp = currentTime +(timezoneObj.totalOffset * MSECS_PER_SEC);
-      //   timezoneObj.localTimestampMs = localTimestamp;
-      //   console.log ("type is "+ typeof timezoneObj.localTimestampMs);
-
-      //   console.log(timezoneObj);
-
-      //   // Special tests
-      //   var testDate = new Date(localTimestamp);
-      //   console.log("Hours: "+ testDate.getHours()+ " Minutes:"+ testDate.getMinutes());
-
-      //   return timezoneObj;
-      // });  
     },
 
     // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example

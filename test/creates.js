@@ -26,7 +26,7 @@ describe('creates', () => {
   });
 
   describe('make a call to timezonebyName API', () => {
-    it('should get a timezone object back', (done) => {
+    it('should get a timezone object back cor US Central Time', (done) => {
       const bundle = {
         inputData: {
           zoneName: 'CT',
@@ -35,7 +35,22 @@ describe('creates', () => {
 
       appTester(App.creates.timezoneName.operation.perform, bundle)
         .then((result) => {
-          result.should.have.property('rawOffset');
+          result.should.have.property('timeZoneName').which.containEql("Central");
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should get a timezone object back for Central Europe', (done) => {
+      const bundle = {
+        inputData: {
+          zoneName: 'CET',
+        }
+      };
+
+      appTester(App.creates.timezoneName.operation.perform, bundle)
+        .then((result) => {
+          result.should.have.property('timeZoneName').which.containEql("Central European");
           done();
         })
         .catch(done);
