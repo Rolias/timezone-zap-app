@@ -2,7 +2,7 @@
   "name": "zapier-platform-example-app-create",
   "version": "1.0.2",
   "description": "A bit of Javascript to help with timezones",
-  "repository": "zapier/zapier-platform-example-app-create",
+  "repository": "github.com/Rolias/timezone-zap-app",
   "homepage": "https://zapier.com/",
   "author": "Tod Gentille <tod-gentille@pluralsight.com>",
   "license": "BSD-3-Clause",
