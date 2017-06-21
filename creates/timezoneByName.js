@@ -13,6 +13,7 @@ module.exports = {
   display: {
     label: 'Timezone Using Limited Set of Zone Names',
     description: 'Will get local timezone offsets based on the passed Time Zone name.'
+
   },
 
   // `operation` is where the business logic goes.
